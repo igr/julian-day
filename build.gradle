@@ -1,0 +1,153 @@
+plugins {
+	id 'java-library'
+	id 'maven-publish'
+	id 'signing'
+	id 'io.codearte.nexus-staging' version '0.30.0'
+}
+
+repositories {
+	mavenCentral()
+}
+
+group = 'org.jodd'
+version = '7.0.0'
+
+rootProject.description = 'Julian Day'
+
+java {
+	sourceCompatibility = JavaVersion.VERSION_1_8
+	targetCompatibility = JavaVersion.VERSION_1_8
+	withSourcesJar()
+	withJavadocJar()
+}
+
+dependencies {
+	testImplementation 'org.junit.jupiter:junit-jupiter-api:5.10.+'
+	testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.10.+'
+}
+
+tasks.named('test') {
+    useJUnitPlatform()
+}
+
+jar {
+	manifest {
+		attributes(
+				'Implementation-Title': project.name,
+				'Implementation-Version': project.version,
+				'Debug-Info': 'on',
+				'Built-By': 'jodd.org'
+		)
+	}
+}
+
+javadoc {
+	options.addStringOption('Xdoclint:none', '-quiet')
+	if (JavaVersion.current().isJava9Compatible()) {
+		options.addBooleanOption('html5', true)
+	}
+}
+
+test {
+	useJUnitPlatform()
+	testLogging {
+		events "standardOut", "passed", "skipped", "failed"
+		showExceptions true
+		exceptionFormat "full"
+		showCauses true
+		showStackTraces true
+
+		afterSuite { desc, result ->
+			if (!desc.parent) { // will match the outermost suite
+				def output = "Results: ${result.resultType} (${result.testCount} tests, ${result.successfulTestCount} successes, ${result.failedTestCount} failures, ${result.skippedTestCount} skipped)"
+				def startItem = '|  ', endItem = '  |'
+				def repeatLength = startItem.length() + output.length() + endItem.length()
+				println('\n' + ('-' * repeatLength) + '\n' + startItem + output + endItem + '\n' + ('-' * repeatLength))
+			}
+		}
+	}
+}
+
+
+//
+// PUBLISH
+//
+
+ext.admin = hasProperty('sonatypeUsername')
+
+publishing {
+	publications {
+		mavenJava(MavenPublication) {
+			artifactId = 'jodd-util'
+			from components.java
+			versionMapping {
+				usage('java-api') {
+					fromResolutionOf('runtimeClasspath')
+				}
+				usage('java-runtime') {
+					fromResolutionResult()
+				}
+			}
+			pom {
+				name = 'Jodd Util'
+				description = 'Jodd Util'
+				url = 'https://util.jodd.org'
+				licenses {
+					license {
+						name = 'BSD-2-Clause'
+						url = 'https://github.com/oblac/jodd-util/blob/master/LICENSE'
+					}
+				}
+				developers {
+					developer {
+						id = 'igor'
+						name = 'Igor Spasić'
+						email = 'igor@jodd.org'
+						timezone = '+1'
+					}
+				}
+				scm {
+					url = 'https://github.com/oblac/jodd-util.git'
+					connection = 'scm:git:git://github.com/oblac/jodd-util.git'
+					developerConnection = 'scm:git:ssh://git@github.com/oblac/jodd-util.git'
+				}
+			}
+		}
+	}
+	repositories {
+		maven {
+			def releasesRepoUrl = "https://oss.sonatype.org/service/local/staging/deploy/maven2/"
+			def snapshotsRepoUrl = "https://oss.sonatype.org/content/repositories/snapshots/"
+			url = version.contains('SNAPSHOT') ? snapshotsRepoUrl : releasesRepoUrl
+			if (admin) {
+				credentials {
+					username sonatypeUsername
+					password sonatypePassword
+				}
+			}
+		}
+	}
+}
+
+signing {
+	required { admin }
+	sign publishing.publications.mavenJava
+}
+
+task install(dependsOn: publishToMavenLocal) {
+	group = 'Publishing'
+	description = 'Installs artifacts to local Maven repository'
+}
+
+//
+// RELEASE
+//
+
+task release() {
+	group 'Project'
+	description 'Rebuilds everything for the release.'
+
+	dependsOn clean
+	dependsOn build
+	dependsOn javadoc
+}
