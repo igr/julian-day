@@ -1,5 +1,10 @@
 # Julian Day Java Library
 
+![Maven Central](https://img.shields.io/maven-central/v/org.jodd/jodd-julian-day)
+[![Build](https://github.com/igr/julian-day/actions/workflows/build.yml/badge.svg?branch=main)](https://github.com/igr/julian-day/actions/workflows/build.yml)
+[![BSD License](https://img.shields.io/badge/license-BSD--2--Clause-blue.svg)](https://github.com/oblac/jodd-util/blob/master/LICENSE)
+
+
 **Julian Day** implementation in Java, with following features:
 
 + high-precision Julian Day calculation (up to milliseconds)
@@ -7,8 +12,24 @@
 + Julian Day to/from **Julian calendar** date conversion
 + Julian Day to/from **Unix time** conversion
 + Basic Julian Day arithmetic operations
++ 0 dependencies
++ Java 8 compatible
 
 ## Usage
+
+Add the library to your project:
+
+Maven:
+
+```xml
+
+```
+
+Gradle:
+
+```groovy
+
+```
 
 
 ## Introduction to Julian Day
@@ -23,12 +44,15 @@ The **Julian Day** is a _continuous_ and _uniform_ count of days since the begin
 All these dates are equivalent. At this instant, the **Julian Day** Number is `0`. It is convenient for astronomers to use since it is not necessary to worry about odd numbers of days in a month, leap years, etc. Once you have the **Julian Day** Number of a particular date in history, it is easy to calculate time elapsed between it and any other **Julian Day** Number.
 
 The **Julian Day** is used in astronomy and chronology as a simple way to express dates. The curiosity is that it starts at noon, not at midnight. The **Julian Day** starts at noon because the astronomical day starts at noon (it is easier to track events that occur during the nighttime).
-. **Julian Day** is invented in the 16th century by _Josephus Justus Scaliger_, a French scholar, who wanted to find a simple method to track astronomical events.
-
-Although the term "Julian Calendar" derives from the name of Julius Caesar, the term "Julian day number" probably does not. Most say that this system was named, not after Julius Caesar, but after its inventor's father, Julius Caesar Scaliger. Perhaps it was simply named after the Julian Calendar.
 
 <details>
 <summary>More on Julian Day</summary>
+
+## History
+
+**Julian Day** is invented in the 16th century by _Josephus Justus Scaliger_, a French scholar, who wanted to find a simple method to track astronomical events.
+
+Although the term "Julian Calendar" derives from the name of Julius Caesar, the term "Julian day number" probably does not. Most say that this system was named, not after Julius Caesar, but after its inventor's father, Julius Caesar Scaliger. Perhaps it was simply named after the Julian Calendar.
 
 ## Astronomical System
 
@@ -54,6 +78,12 @@ Since most days within about 150 years of the present have Julian day numbers be
 
 `MJD 0` thus corresponds to `JD 2,400,000.5`, which is twelve hours after noon on `JD 2,400,000 = 1858-11-16`. Thus `MJD 0` designates the midnight of November 16th/17th, 1858, so day `0` in the system of modified Julian day numbers is the day `1858-11-17`.
 
+## Links
+
++ [Julian Day - Wikipedia](https://en.wikipedia.org/wiki/Julian_day)
++ [Julian Day Calculator](https://www.fourmilab.ch/documents/calendar/)
++ [JD Converter @ Nasa JPL](https://ssd.jpl.nasa.gov/tools/jdc/#/jd)
+
 </details>
 
 ## Calendar Systems
@@ -75,8 +105,5 @@ The library offer high-precision Julian Day calculation, up to milliseconds. To 
 
 This is required as `double` precision is not enough to store the Julian Day number with high precision (up to milliseconds). The fractional part of the Julian Day number is very small, and the integer part is very large. When you add these two parts, some of the fractional numerals may be lost.
 
-## Links
 
-+ [Julian Day - Wikipedia](https://en.wikipedia.org/wiki/Julian_day)
-+ [Julian Day Calculator](https://www.fourmilab.ch/documents/calendar/)
-+ [JD Converter @ Nasa JPL](https://ssd.jpl.nasa.gov/tools/jdc/#/jd)
+## FAQ
