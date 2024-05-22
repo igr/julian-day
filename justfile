@@ -30,4 +30,5 @@ release-create version:
 
 # closes and release staging repository, after the release is published
 release-publish:
-    ./gradlew closeAndReleaseSonatypeStagingRepository
+    ./gradlew findSonatypeStagingRepository closeSonatypeStagingRepository
+    ./gradlew findSonatypeStagingRepository releaseSonatypeStagingRepository

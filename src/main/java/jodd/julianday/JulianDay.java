@@ -205,7 +205,7 @@ public class JulianDay {
     }
 
     /**
-     * Creates Julian Day from Gregorian calendar date.
+     * Creates Julian Day from a Gregorian calendar date.
      */
     public static JulianDay ofGregorianDate(final LocalDateTime ldt) {
         final double jd = gregorianToJd(ldt.getYear(), ldt.getMonthValue(), ldt.getDayOfMonth());
@@ -214,7 +214,7 @@ public class JulianDay {
     }
 
     /**
-     * Creates Julian Day from Gregorian calendar date.
+     * Creates Julian Day from a Gregorian calendar date.
      */
     public static JulianDay ofGregorianDate(final LocalDate ld) {
         final double jd = gregorianToJd(ld.getYear(), ld.getMonthValue(), ld.getDayOfMonth());
@@ -229,7 +229,7 @@ public class JulianDay {
     }
 
     /**
-     * Creates Julian Day from current Gregorian calendar date and time.
+     * Creates Julian Day from the current Gregorian calendar date and time.
      */
     public static JulianDay now() {
         return JulianDay.ofGregorianDate(LocalDateTime.now());
@@ -268,7 +268,7 @@ public class JulianDay {
     }
 
     /**
-     * Creates Julian Day from precise value of days.
+     * Creates Julian Day from the precise value of days.
      */
     public static JulianDay of(final DayValue value) {
         return new JulianDay(value.day(), value.time());
