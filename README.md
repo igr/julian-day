@@ -1,6 +1,6 @@
 # Julian Day Java Library
 
-![Maven Central](https://img.shields.io/maven-central/v/org.jodd/jodd-julian-day)
+![Maven Central](https://img.shields.io/maven-central/v/org.jodd/julian-day)
 [![Build](https://github.com/igr/julian-day/actions/workflows/build.yml/badge.svg?branch=main)](https://github.com/igr/julian-day/actions/workflows/build.yml)
 [![BSD License](https://img.shields.io/badge/license-BSD--2--Clause-blue.svg)](https://github.com/oblac/jodd-util/blob/master/LICENSE)
 
