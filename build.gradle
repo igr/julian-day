@@ -78,27 +78,16 @@ publishing {
 			}
 		}
 	}
-	repositories {
-		maven {
-			def releasesRepoUrl = "https://oss.sonatype.org/service/local/staging/deploy/maven2/"
-			def snapshotsRepoUrl = "https://oss.sonatype.org/content/repositories/snapshots/"
-			url = version.contains('SNAPSHOT') ? snapshotsRepoUrl : releasesRepoUrl
-            credentials {
-                username = System.getenv("MAVEN_USERNAME")
-                password = System.getenv("MAVEN_PASSWORD")
-            }
-		}
-	}
-}
-
-// must be after publishing
-signing {
-    useGpgCmd()
-    sign publishing.publications.mavenJava
 }
 
 nexusPublishing {
     repositories {
         sonatype()
     }
+}
+
+// must be after publishing
+signing {
+    useGpgCmd()
+    sign publishing.publications.mavenJava
 }

@@ -25,10 +25,8 @@ jobs:
           echo "Verify gpg secret key"
           gpg --list-secret-keys --keyid-format LONG
 
-      - name: Publish package
-        run: ./gradlew clean build publish -Psigning.gnupg.keyName=568EC4DD -Psigning.gnupg.passphrase=${{ secrets.GPG_SECRET_KEY_PASSWORD }}
+      - name: Publish library
+        run: ./gradlew clean build publishToSonatype -Psigning.gnupg.keyName=568EC4DD -Psigning.gnupg.passphrase=${{ secrets.GPG_SECRET_KEY_PASSWORD }}
         env:
-          MAVEN_USERNAME: ${{ secrets.MAVEN_USERNAME }}
-          MAVEN_PASSWORD: ${{ secrets.MAVEN_PASSWORD }}
           ORG_GRADLE_PROJECT_sonatypeUsername: ${{ secrets.SONATYPE_USERNAME }}
           ORG_GRADLE_PROJECT_sonatypePassword: ${{ secrets.SONATYPE_PASSWORD }}
