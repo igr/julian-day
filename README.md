@@ -26,7 +26,7 @@ Maven:
 ```xml
 <dependency>
     <groupId>org.jodd</groupId>
-    <artifactId>jodd-julian-day</artifactId>
+    <artifactId>julian-day</artifactId>
     <version>7.0.0</version>
 </dependency>
 ```
