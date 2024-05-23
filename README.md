@@ -126,7 +126,7 @@ The library offers high-precision Julian Day calculation, up to milliseconds. To
 Separation is required as `double` precision is not enough to store the Julian Day number with high precision (up to milliseconds). The fractional part of the Julian Day number is tiny, and the integer part is huge. When you add these two parts, some of the fractional numerals may be lost.
 
 <details>
-<summary>READ MORE about Julian Day</summary>
+<summary>💁‍♂️ READ MORE about Julian Day</summary>
 
 ## 🌛 History
 
@@ -166,6 +166,16 @@ The reduced Julian day number is the integer part of the Julian day number.
 ### Truncated Julian Day Number (TJD)
 
 The truncated Julian day number is the integer part of the Julian day number minus `2,400,000`. The Truncated Julian Day (TJD) was introduced by NASA/Goddard in 1979 as part of a parallel grouped binary time code (PB-5) "designed specifically, although not exclusively, for spacecraft applications." TJD was a 4-digit day count from MJD 40000, which was May 24, 1968, represented as a 14-bit binary number.
+
+### Julian Day Number (JDN)
+
+The Julian day number is not equal to the integer part of the Julian Day. It is calculated as `JD + 0.5`, rounding down to the nearest integer. This is the Julian day number used in the Julian Day calculation.
+
+## About Scaliger
+
+The polymath Joseph Justus Scaliger (1540-1609) named the "Julian Period," not after the Julian Calendar or even directly after Julius Caesar, but in memory of his father, who happened to be named Julius Caesar Scaliger (1484-1558). The relation of father and son sounds like that between James Mill (1773-1836) and John Stuart Mill (1806-1873), who were among the principal exponents of Utilitarianism. Where John Stuart Mill was being taught Greek at three, Scaliger's father required him as a child to give a short speech in Latin every day. The elder Scaliger, however, for some reason forbade the study of Greek, which the son took up on the father's death, determining that "those who do not know Greek know nothing at all." As the younger Mill seems to have been plagued by his father's memory the rest of his life, Scaliger was also troubled, suffering from strange dreams and insomia and sometimes forgetting to eat. He thought that he had once encountered the Devil.
+
+But Scaliger was also one of Europe's first Arabists, having studied with Guillaume Postel (1510-1581), himself a very eccentric scholar, ruled insane by the Inquisition, who obtained the first Chair of Arabic at the Collège de France in 1539. Scaliger was invited to teach Arabic at Leiden in 1592. He hated lecturing but was instrumental in establishing a Chair of Arabic at the University in 1599. One of Scaliger's students, Thomas van Erpe, or Erpenius (1584-1625), produced the first modern grammar of Arabic, the Grammatica Arabica (1613). Julian Day Numbers effectively ended the use of the Egyptian calendar and the Era of Nabonassar for astronomical purposes, as had been introduced by Claudius Ptolemy (c.100-c.170 AD). Scaliger picked 4713 BC because it was the first year on a number of different calendar cycles and was earlier than any possible historical dates that he knew of.
 
 ## 🚀 Links
 

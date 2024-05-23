@@ -43,10 +43,22 @@ public class JulianDay {
 
     /**
      * Returns the fraction part of Julian Day (JD).
-     * Returned value is always in [0.0, 1.0) range.
+     * The returned value is always in [0.0, 1.0) range.
      */
     public double time() {
         return this.value.time();
+    }
+
+    /**
+     * Returns Julian Day Number (JDN).
+     * Note that JDN is not equal to {@link #day()}.
+     * It is calculated by rounding to the nearest integer.
+     */
+    public int julianDayNumber() {
+        if (this.value.time() >= 0.5) {
+            return this.day() + 1;
+        }
+        return this.day();
     }
 
     /**
@@ -275,21 +287,21 @@ public class JulianDay {
     }
 
     /**
-     * Creates Julian Day from precise value of Reduced Julian Day (RJD).
+     * Creates Julian Day from the precise value of Reduced Julian Day (RJD).
      */
     public static JulianDay ofReducedJulianDay(final DayValue value) {
         return JulianDay.REDUCED_JULIAN_DAY_0.add(value);
     }
 
     /**
-     * Creates Julian Day from precise value of Modified Julian Day (MJD).
+     * Creates Julian Day from the precise value of Modified Julian Day (MJD).
      */
     public static JulianDay ofModifiedJulianDay(final DayValue value) {
         return JulianDay.MODIFIED_JULIAN_DAY_0.add(value);
     }
 
     /**
-     * Creates Julian Day from precise value of truncated Julian Day (TJD).
+     * Creates Julian Day from the precise value of truncated Julian Day (TJD).
      */
     public static JulianDay ofTruncatedJulianDay(final DayValue value) {
         return JulianDay.TRUNCATED_JULIAN_DAY_0.add(value);
