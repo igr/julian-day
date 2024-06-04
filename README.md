@@ -27,14 +27,14 @@ Maven:
 <dependency>
     <groupId>org.jodd</groupId>
     <artifactId>julian-day</artifactId>
-    <version>7.1.0</version>
+    <version>7.2.0</version>
 </dependency>
 ```
 
 Gradle:
 
 ```groovy
-implementation 'org.jodd:julian-day:7.1.0'
+implementation 'org.jodd:julian-day:7.2.0'
 ```
 
 Create `JulianDay` in different ways:
