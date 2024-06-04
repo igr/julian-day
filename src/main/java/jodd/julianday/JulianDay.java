@@ -1,6 +1,7 @@
 package jodd.julianday;
 
 import java.math.BigDecimal;
+import java.time.Instant;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
@@ -159,6 +160,12 @@ public class JulianDay {
     }
 
     /**
+     * Converts Julian Day to an instant.
+     */
+    public Instant toInstant() {
+        return Instant.ofEpochMilli(this.toUnixMilliseconds());
+    }
+    /**
      * Converts Julian Day to Unix time in milliseconds.
      */
     public long toUnixMilliseconds() {
@@ -241,6 +248,13 @@ public class JulianDay {
     }
 
     /**
+     * Creates Julian Day from an instant.
+     */
+    public static JulianDay ofInstant(final Instant instant) {
+        return JulianDay.ofUnixMilliseconds(instant.toEpochMilli());
+    }
+
+    /**
      * Creates Julian Day from the current Gregorian calendar date and time.
      */
     public static JulianDay now() {
@@ -293,6 +307,10 @@ public class JulianDay {
         return JulianDay.REDUCED_JULIAN_DAY_0.add(value);
     }
 
+    public static JulianDay ofReducedJulianDay(final double value) {
+        return ofReducedJulianDay(DayValue.of(value));
+    }
+
     /**
      * Creates Julian Day from the precise value of Modified Julian Day (MJD).
      */
@@ -300,11 +318,19 @@ public class JulianDay {
         return JulianDay.MODIFIED_JULIAN_DAY_0.add(value);
     }
 
+    public static JulianDay ofModifiedJulianDay(final double value) {
+        return ofModifiedJulianDay(DayValue.of(value));
+    }
+
     /**
      * Creates Julian Day from the precise value of truncated Julian Day (TJD).
      */
     public static JulianDay ofTruncatedJulianDay(final DayValue value) {
         return JulianDay.TRUNCATED_JULIAN_DAY_0.add(value);
+    }
+
+    public static JulianDay ofTruncatedJulianDay(final double value) {
+        return ofTruncatedJulianDay(DayValue.of(value));
     }
 
     // </editor-fold>

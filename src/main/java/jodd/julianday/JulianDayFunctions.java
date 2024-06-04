@@ -147,7 +147,7 @@ class JulianDayFunctions {
     /**
      * High-precision calculation of Julian Day from given day and time value.
      * We can't simply add day and time, because of floating point precision:
-     * day is a big number and time is a small number. Hence, we need to add them separately.
+     * day is a big number, and time is a small number. Hence, we need to add them separately.
      */
     static JulianDay julianDay(final double dayAtMidnight, final double timeOfDay) {
         final double jd = dayAtMidnight + timeOfDay;
@@ -176,8 +176,18 @@ class JulianDayFunctions {
 
     /**
      * Converts Unix time in milliseconds to Julian Day.
+     * This is a high-precision conversion.
      */
-    static double fromUnixMillis(final long unixMillis) {
-        return (unixMillis / 8_6400_000.0) + J1970;
+    static DayValue fromUnixMillis(final long unixMillis) {
+        final int intPart = (int) (unixMillis / 8_6400_000L);
+        final int delta = (int) (unixMillis - intPart * 8_6400_000L);
+        final double time = delta / 8_6400_000.0;
+
+        if (time > 0.5) {
+            return new DayValue(intPart + 2440588, time - 0.5);
+        } else {
+            return new DayValue(intPart + 2440587, time + 0.5);
+        }
+        // return (unixMillis / 8_6400_000.0) + J1970;
     }
 }

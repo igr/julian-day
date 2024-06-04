@@ -21,7 +21,7 @@ public class DayValue {
      */
     private final int day;
 
-    /**
+	/**
      * Returns integer part of the day.
      */
     public int day() {
@@ -90,5 +90,11 @@ public class DayValue {
                 "day=" + this.day +
                 ", time=" + this.time +
                 '}';
+    }
+
+    public static DayValue of(final double value) {
+        final int day = (int) value;
+        final double time = value - day;
+        return new DayValue(day, time);
     }
 }
